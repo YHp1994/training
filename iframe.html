@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>利用iframe本地localStorage的扩容</title>
+</head>
+<body>
+<div id="color" style="width: 100px;height: 100px"></div>
+    <script>
+        window.addEventListener("message",function (e) {
+            console.log(e,"eee")
+            if(e.source !== window.parent){
+                return;
+            }else{
+                localStorage.setItem(e.data,key,e.data.value);
+            }
+        })
+    var fn = function(){};
+    fn.prototype = {
+        setLocal:function(key,value){
+            localStorage.setItem(key,value);
+        },
+        getLocal:function(key){
+            return localStorage.getItem(key);
+        },
+        removeLocal:function(key){
+            localStorage.removeItem(key);
+        },
+        bindEvent:function(){
+            var self = this;
+            //监听
+            window.addEventListener('message',function(e){
+                if(window.parent!=e.source) return;
+                var option = JSON.parse(e.data);
+                if(option.type.toLowerCase()=="get"){
+                    var data = self.getLocal(option.key);
+                    window.parent.postMessage(data,'*');
+                }
+                option.type.toLowerCase()=="set"&&self.setLocal(option.key,option.value);
+                option.type.toLowerCase()=="remove"&&self.removeLocal(option.key);
+            })
+        },
+        init:function(){
+            var self = this;
+            self.bindEvent();
+        }
+    }
+    var tools = new fn();
+    tools.init();
+
+
+//    window.addEventListener('message', function(e) {
+////        var color = e.data;
+//        console.log(e);
+//        document.getElementById('color').style.backgroundColor = "cyan";
+//    }, false);
+        </script>
+</body>
+</html>

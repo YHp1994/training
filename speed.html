@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>利用图片计算网速</title>
+  
+</head>
+<body>
+<!--第一个在本地访问会访问不到 ---->
+<img src="https://www.baidu.com/img/baidu_jgylogo3.gif" crossorigin = "anonymous" alt="">
+<img src="https://www.baidu.com/img/baidu_jgylogo3.gif"  alt="">
+
+
+	<button id="test">测网速</button>
+    
+
+</body>
+ <script type="text/javascript">
+		    let oBtn = document.getElementById("test");
+		    oBtn.onclick = function(){
+		    	console.log("aaa")
+				netSpeed();
+		    }
+
+
+		    function netSpeed(){
+			    let s = Date.now();
+			    let img = new Image();
+                img.crossorigin = 'anonymous';
+			    img.src = "u1597.png";
+			    img.onload = function(){
+			    	let e = Date.now();
+			    	let w = 1/(e -s);
+			    	console.log(w)
+			    }
+		    }
+ </script>
+</html>

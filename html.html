@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>html语义化</title>
+    <style>
+    *{margin:0;padding:0}
+		header,nav,section,footer{
+			width:70%;
+			margin:0 auto;
+		}
+		header{
+			height: 100px;
+			background-color: red;
+		}
+		nav{
+			height: 100px;
+			background-color: cyan;
+		}
+		nav ul li{
+			float: left;
+			margin-right: 12px;
+			list-style: none;
+		}
+		section{
+			height:500px;
+		}
+		article{
+			width:700px;
+			height:100%;
+			float:left;
+			background-color: pink;
+		}
+		aside{
+			width:290px;
+			height:100%;
+			float:right;
+			background-color: yellow;
+			display:block;
+		}
+		footer{
+			height:100px;
+			background-color: green;
+		}
+    </style>
+    <!--IE的hack-->
+	<!--[if lte IE 8]>
+	<script src="js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<header>
+		<h1>
+			<hgroup>
+				<h1>这是一个主标题</h1>
+				<h2>这是一个副标题</h2>
+			</hgroup>
+		</h1>
+	</header>
+	<nav>
+		<ul>
+			<li>导航1</li>
+			<li>导航2</li>
+			<li>导航3</li>
+		</ul>
+	</nav>
+	<section>
+		<article>
+			<p>文章</p>
+			<time datetime="2018-08-07" pubdate>2018年08月07日</time>
+		</article>
+		<aside>侧边栏</aside>
+	</section>
+	<footer>
+		<address>联系地址：皇后大道</address>
+	</footer>
+</body>
+</html>
