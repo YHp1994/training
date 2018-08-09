@@ -1,68 +1,91 @@
-## 利用图片测试网速 上报数据
-- 测网速：
+## HTML5陀螺仪
+陀螺仪又叫角速度传感器，是不同于加速度计（G-sensor）的，他的测量物理量是偏转、倾斜时的转动角速度。在手机上，仅用加速度计没办法测量或重构出完整的3D动作，测不到转动的动作的，G-sensor只能检测轴向的线性动作。但陀螺仪则可以对转动、偏转的动作做很好的测量，这样就可以精确分析判断出使用者的实际动作。而后根据动作，可以对手机做相应的操作！
+
+###### 获取旋转角度
+
+x轴为轴，beta的作用域为(-180, 180)。
+
+y轴为轴，gamma的作用域为(-90, 90)。
+
+z轴为轴，alpha的作用域为(0, 360)。
+```
+ if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', function (e) {
+                    var a = document.getElementById('alpha'),
+                        b = document.getElementById('beta'),
+                        g = document.getElementById('gamma'),
+                        alpha = e.alpha,
+                        beta = e.beta,
+                        gamma = e.gamma;
+         
+                    a.innerHTML = alpha;
+                    b.innerHTML = beta;
+                    g.innerHTML = gamma;
+         
+                }, false);
+            } else {
+                document.getElementById('tip').innerHTML = '你的浏览器不支持陀螺仪';
+            }
+```
+
+
+1.deviceorientation 
+设备的物理方向信息，表示为一系列本地坐标系的旋角。
+
+2.devicemotion
+提供设备的加速信息
+
+3.compassneedscalibration
+ 用于通知Web站点使用罗盘信息校准上述事件
+ 
+######  
+###### 获取罗盘校准
+https://blog.csdn.net/jaswhen/article/details/48526327
 
 ```
-let s = Date.now();
-let img = new Image();
-img.src = "u1597.png";
-img.onload = function(){
-let e = Date.now();
-let w = 图片大小/(e-s);
-console.log(w)
- }
+window.addEventListener(“compassneedscalibration", function(event) {
+      alert('您的罗盘需要校准');
+      event.preventDefault();
+  }, true);
 ```
+###### 获取重力加速度
 
-###### 上报数据（系统的监控平台，系统的bug监控，打点）
-transparent.gif?newmap=1&type=ms0&target=geo&ts=1533626566945&start_geo_loc=1&share_geo_all=1&html5_geo_all=1&status=2
-将用户的数据传给后台，根据请求的日志获取用户一些信息（可以将任何信息作为埋点）
-navigator.sendBeacon() 方法可用于通过HTTP将少量数据异步传输到Web服务器。
-
-
-###### crossorigin
-属性的详细解释https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
-crossorigin 所有能引入跨域资源的标签（script  link img）都有这个属性
-
-#######跨域
-跨域，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript施加的安全限制。
-所谓同源是指，域名，协议，端口均相同：
-http://www.123.com/index.html 调用 http://www.123.com/server.PHP （非跨域）
-http://www.123.com/index.html 调用 http://www.456.com/server.php （主域名不同:123/456，跨域）
-http://abc.123.com/index.html 调用 http://def.123.com/server.php（子域名不同:abc/def，跨域）
-http://www.123.com:8080/index.html调用 http://www.123.com:8081/server.php（端口不同:8080/8081，跨域）
-http://www.123.com/index.html 调用 https://www.123.com/server.php（协议不同:http/https，跨域）
-请注意：localhost和127.0.0.1虽然都指向本机，但也属于跨域。
-jsonp
-jstopng
-把代码写在图片里 再用canvans画出来 得到代码  利用img进行跨域
-iframe
-同域之间共享cookie可以用 document.domain()
-
-###### 判断图片加载完成的三种方式
-https://www.cnblogs.com/snandy/p/3704938.html
-load事件  所有浏览器都支持img的load事件
-readystatechange事件 readyState为complete和loaded则表明图片已经加载完毕。测试IE6-IE10支持该事件，其它浏览器不支持
-img的complete属性 轮询不断监测img的complete属性，如果为true则表明图片已经加载完毕，停止轮询。该属性所有浏览器都支持。如果图片加载失败，在IE中complete的值一直为false,而其他浏览器最后会变为true
+```
+window.addEventListener("devicemotion", function(event) {
+   // 处理event.acceleration
+   //	x(y,z):设备在x(y,z)方向上的移动加速度值
+   //event.accelerationIncludingGravity
+   //考虑了重力加速度后设备在x(y,z)
+   // event.rotationRate
+	//alpha,beta,gamma:设备绕x,y,z轴旋转的角度
+  }, true);
+```
+## CSS3 3D模型
+淘宝造物节
 
 
+## 集合Touch事件
 
-## css远程攻击漏洞
-###### color: expression(alert('XSS'));background: url(javascript:alert('script injected'))
-https://blog.csdn.net/u013909970/article/details/51144639
-###### 用伪类伪元素精简DOM
-尽量少用DOM，CPU计算DOM，GPU渲染CSS
+```
+viewer.on('touchstart', function(e) {
+    x1 = e.targetTouches[0].pageX;  //$(this).offset().left;
+    y1 = e.targetTouches[0].pageY;  //$(this).offset().top;
+});
+viewer.on('touchmove',function(){
+    var dist_x = x2 - x1,
+        dist_y = y2 - y1,
+        deg_x = Math.atan2(dist_y, perspective) / Math.PI * 180,
+        deg_y = -Math.atan2(dist_x, perspective) / Math.PI * 180,
+        i,
+        c_x_deg += deg_x;
+        c_y_deg += deg_y;
+        
+    cube.css('transform', 'rotateX(' + deg_x + 'deg) rotateY(' + deg_y + 'deg)');
+})
+```
+###### CSS3D库
+http://tridiv.com/app/
 
-https://a.singlediv.com/
-
-
-## iframe对远程localStorage扩容
-跨域的时候不能操作dom
-
-localStorage本地存储的最大空间是5M
-https://blog.csdn.net/zhouziyu2011/article/details/61209268
-
-## html语义化的重要性
-###### 根据内容的结构化（内容语义化），选择合适的标签（代码语义化）便于开发者阅读和写出更优雅的代码的同时让浏览器的爬虫和机器很好地解析
-https://juejin.im/entry/5ab5f229518825558a069304
-
-http://www.cnblogs.com/freeyiyi1993/p/3615179.html
+ 
+ 
 
