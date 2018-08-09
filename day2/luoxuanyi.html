@@ -1,0 +1,66 @@
+<!-- WEBKIT SAMPLE -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <style type="text/css">
+            
+            
+        </style>
+        
+        
+        
+    </head>
+    <body>
+        alpha:<span id="alpha"></span><br/>
+        beta:<span id="beta"></span><br/>
+        gamma:<span id="gamma"></span><br/>
+
+        <script type="text/javascript">
+           if (window.DeviceOrientationEvent) {
+                // 获取旋转角度
+                window.addEventListener('deviceorientation', function (e) {
+                    var a = document.getElementById('alpha'),
+                        b = document.getElementById('beta'),
+                        g = document.getElementById('gamma'),
+                        alpha = e.alpha,
+                        beta = e.beta,
+                        gamma = e.gamma;
+         
+                    a.innerHTML = parseInt(alpha);
+                    b.innerHTML = parseInt(beta);
+                    g.innerHTML = parseInt(gamma);
+         
+                }, false);
+                // 获取罗盘校准
+                window.addEventListener("compassneedscalibration", function(event) {
+                  alert('您的罗盘需要校准');
+                  event.preventDefault();
+              }, true);
+                // 获取重力加速度
+               var speed = 50;//定义一个数值 
+                var x = y = z = lastX = lastY = lastZ = 0;//重置所有数值 
+                window.addEventListener('devicemotion', function(){ 
+                var acceleration =event.accelerationIncludingGravity;//将传感值赋给acceleration 
+                x = acceleration.x; 
+                y = acceleration.y; 
+                z = acceleration.z; 
+                if(Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed ) { 
+                // TODO:在此处可以实现摇一摇之后所要进行的数据逻辑操作 
+                    alert("摇一摇啊")
+                } 
+                lastX = x; 
+                lastY = y; 
+                lastZ = z; 
+                }, false); 
+
+
+
+            } else {
+                document.getElementById('tip').innerHTML = '你的浏览器不支持陀螺仪';
+            }
+        </script>
+        
+    </div>
+    </body>
+</html>
