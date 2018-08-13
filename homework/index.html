@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
+    <style>
+    	html, body, div , ul, li{
+	    margin: 0;
+	    padding: 0;
+	    font-size: 12px;
+	}
+	.wrap{
+		position: relative;
+	}
+	.wrap img{
+		width: 100%;
+		height: 100%;
+		vertical-align: top;
+	}
+	ul{
+		list-style: none;
+	}
+	.panel{
+		position: absolute;
+		left: 0;
+		top: 70%;
+		width: 100%;
+		height: 30%;
+		overflow: hidden;
+		
+		/*background-color: rgba(0,0,0,0.6);*/
+		background-image: linear-gradient(rgba(0,0,0,0.01),rgba(0,0,0,0.5));
+	　　linear-gradient(to bottom, rgba(0,0,0,0.01), rgba(0,0,0,0.5));
+	　　linear-gradient(to top, rgba(0,0,0,0.2),rgba(0,0,0,0.5));
+	　　linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+	　　linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+		animation: down 1s;
+	}
+	.panel .up{
+		font-size: 2rem;
+		text-align: center;
+		color: #FFFFFF;
+	}
+	.panel .normal{
+		width: 100%;
+		padding: 1rem 0;
+	}
+	.panel .normal li{
+		width: 90%;
+		height: 8rem;
+		margin: 0.8rem auto;
+		background: #FFFFFF;
+		border-radius: 10px;
+		animation: down 1s;
+	}
+	.panel.full-page{
+		top: 0;
+		width: 100%;
+		height: 100%;
+		transition: all 0.3s;background-color: rgba(0,0,0,0.5);
+		animation: all 1s;
+	}
+	.panel.full-page li{
+		animation: up 1s;
+	}
+	.panel.no-full-page li{
+		animation: down 1s;
+	}
+	.panel.detail-page{
+		background: cyan;
+	}
+	.panel.detail-page .up{
+		display: none;
+	}
+	
+	
+	
+	@-webkit-keyframes up {
+	  from,
+	  60%,
+	  75%,
+	  90%,
+	  to {
+	    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	  }
+	
+	  from {
+	    opacity: 0;
+	    -webkit-transform: translate3d(0, -50px, 0);
+	    transform: translate3d(0, -50px, 0);
+	  }
+	
+	  60% {
+	    opacity: 1;
+	    -webkit-transform: scale3d(1, 1.04, 1.05);
+	    transform: scale3d(1, 1.04, 1.05);
+	  }
+	
+	  75% {
+	    -webkit-transform: translate3d(0, 10px, 0);
+	    transform: translate3d(0, 10px, 0);
+	  }
+	
+	  90% {
+	    -webkit-transform: scale3d(1, 1.04, 1.05);
+	    transform: scale3d(1, 1.04, 1.05);
+	  }
+	
+	  to {
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+	@-webkit-keyframes down {
+	  from,
+	  60%,
+	  75%,
+	  90%,
+	  to {
+	    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	  }
+	
+	  from {
+	    opacity: 0;
+	    -webkit-transform: translate3d(0, 100px, 0);
+	    transform: translate3d(0, 100px, 0);
+	  }
+	
+	  60% {
+	    opacity: 1;
+	    -webkit-transform: scale3d(1, 1.005, 1.05);
+	    transform: scale3d(1, 1.01, 1.05);
+	  }
+	
+	  75% {
+	    -webkit-transform: translate3d(0, 10px, 0);
+	    transform: translate3d(0, 10px, 0);
+	  }
+	
+	  90% {
+	    -webkit-transform: scale3d(1, 1.005, 1.05);
+	    transform: scale3d(1, 1.01, 1.05);
+	  }
+	  to {
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+		
+	
+    </style>
+</head>
+<body>
+	<div>
+		<div class="wrap">
+			<img src="img/bg.png" alt="" />
+		</div>
+		<div class="panel">
+			<div class="up">up</div> 
+			<ul class="normal">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+				<li>5</li>
+			</ul>
+		</div>
+	</div>
+		
+		<script>
+			$(".up").click(function(){
+				if($(".panel").hasClass("full-page")){
+					$(".panel").addClass("no-full-page").removeClass("full-page")
+				}else{
+					$(".panel").addClass("full-page").removeClass("no-full-page")
+				}
+			});
+		</script>
+</body>
+</html>

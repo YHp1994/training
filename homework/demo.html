@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		html, body, div {
+			    margin: 0;
+			    padding: 0;
+			    border: 0;
+			    font-size: 100%;
+			    font: inherit;
+			    vertical-align: baseline;
+			}
+			div {
+			    text-align: center;
+			    position: relative;
+			    width: 250px;
+			    height: 110px;
+			    margin-left: -34px;
+			    margin-top: -70px;
+			    background-image:repeating-linear-gradient(to right,transparent,transparent 8px,#708090 8px,#708090 10px),linear-gradient(to bottom,#f9b3b3 10px,#c0c0c0 10px,#c0c0c0 16px,transparent 16px),linear-gradient(to right,#cacaca 20px,#ffdb00 125px,#eee8aa 30px,#f9b3b3 30px,#ffdb00 125px,#cacaca 250px);
+			    border-radius: 250px 250px 10px 10px;
+			    border: 2px solid #708090;
+			}
+
+			div {
+			    position: absolute;
+			    left: 50%;
+			    top: 50%;
+			}
+			div:before {
+				position: absolute;
+			    left: 0px;
+			    top: 52px;
+			    content: '';
+			    width: 18px;
+			    height: 150px;
+			    margin-left: 118px;
+			    margin-top: 60px;
+			    padding-top: 20px;
+			    z-index: 2;
+			    background-color: white;
+			    border-radius: 0px 3px 10px 10px;
+			    /*border: 2px solid #708090;*/
+			   	border-left: 2px solid #708090;	
+			    -webkit-box-shadow: 0 0px 0px rgba(255,255,255), inset 0 -3px 0px #708090, inset -20px 0 2px rgba(0,0,0,0.05);
+			    box-shadow: 0 0px 0px rgba(255,255,255), inset 0 -3px 0px #708090, inset -20px 0 2px rgba(255,255,255);
+			    font-family: Helvetica,Arial;
+			    font-size: 9px;
+			    font-weight: bold;
+			    letter-spacing: 1px;
+			    color: #d3d3d3;
+			}
+
+			div:before,  div:after {
+			    display: block;
+			    content: '';
+			    position: absolute;
+			}
+			div:after {
+				position: absolute;
+			    left: 78px;
+			    top: -12px;
+			    width: 15px;
+			    height: 15px;
+			    margin-left: 34px;
+			    margin-top: -7px;
+			    background-image: linear-gradient(to bottom,#ffc0cb 10px,#c0c0c0 10px,#c0c0c0 16px,#eee8aa 16px);
+			    border-radius: 50%;
+			    border: 2px solid #708090;
+			    -webkit-box-shadow: 3px 6px 2px rgba(0,0,0,0.2);
+			    box-shadow: 3px 6px 2px rgba(0,0,0,0.2);
+			    -webkit-transform: rotate(12deg);
+			    transform: rotate(12deg);
+			}
+	</style>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
